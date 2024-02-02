@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/all.css" />
+    
+    
+</head>
+<body>
+    <div class="header">
+
+        <div class="header-information">
+            <div class="algorithm-header">
+                <h1 class="title">Sorting Algorithms</h1>
+            </div>
+        
+            <div class="buttons">
+                <button id="button1" onclick="scrollToSection('insertion')"><b>Insertion</b></button>
+                <button id="button1" onclick="scrollToSection('selection')"><b>Selection</b></button>
+                <button id="button1" onclick="scrollToSection('bubble')"><b>Bubble</b></button>
+                <button id="button1" onclick="scrollToSection('shell')"><b>Shell</b></button>
+                <button id="button1" onclick="scrollToSection('merge')"><b>Merge</b></button>
+                <button id="button1" onclick="scrollToSection('quick')"><b>Quick</b></button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="algorithm-information-div">
+
+        <div class="algorithm-gif-header">
+            <h1 class="animations-title">Sorting Algorithms Animations</h1>
+            <h4 class="animations-description">The provided animations demonstrate the efficient sorting of data sets originating from various starting points, showcasing the effectiveness of different algorithms.</h4>
+        </div>
+
+        <p class="animations-text">
+            Click each image to see the animation take place.
+        </p>
+         
+        <div class="algorithm-gif">
+
+            <figure class="gif-hover">
+                <img id="insertionGif"  src="gif/insertion.gif" alt="Sorting Algorithm Insertion GIF" loading="lazy">
+                <figcaption>Insertion Sort</figcaption>
+            </figure>
+            
+            <figure class="gif-hover">
+                <img id="selectionGif"  src="gif/selection.gif" alt="Sorting Algorithm Selection GIF" loading="lazy">
+                <figcaption>Selection Sort</figcaption>
+            </figure>
+            
+            <figure class="gif-hover">
+                <img id="bubbleGif"  src="gif/bubble.gif" alt="Sorting Algorithm Selection GIF" loading="lazy">
+                <figcaption>Bubble Sort</figcaption>
+            </figure>
+
+            <figure class="gif-hover">
+                <img id="shellGif"  src="gif/shell.gif" alt="Sorting Algorithm Selection GIF" loading="lazy">
+                <figcaption>Shell Sort</figcaption>
+            </figure>
+            
+            <figure class="gif-hover">
+                <img id="mergeGif"  src="gif/merge.gif" alt="Sorting Algorithm Selection GIF" loading="lazy">
+                <figcaption>Merge Sort</figcaption>
+            </figure>
+
+            <figure class="gif-hover">
+                <img id="quickGif"  src="gif/quick.gif" alt="Sorting Algorithm Selection GIF" loading="lazy">
+                <figcaption>Quick Sort</figcaption>
+            </figure>
+        </div>
+        
+    </div>
+
+    <div class="algorithm-information-div">
+        <div class="description">
+            <h1>What is a sorting algorithm? </h1>
+            <p>
+                A sorting algorithm is a systematic approach used to arrange elements in a specific order within a collection, typically a list or an array. The primary objective of sorting is to organize data in a way that makes it easier to search, retrieve, and analyze. Sorting algorithms play a crucial role in computer science and various applications, ranging from database management to data visualization.
+            </p>
+            <p>
+                There are various sorting algorithms, each with its own set of advantages, disadvantages, and specific use cases. Here's a brief overview of the key concepts related to sorting algorithms:
+            </p>
+            <ul>
+                <li><b>Comparison-based vs. Non-comparison-based:</b> Sorting algorithms can be broadly classified into two categories based on whether they rely on pairwise comparisons between elements. Comparison-based algorithms, such as bubble sort, merge sort, and quicksort, compare elements and determine their relative order. Non-comparison-based algorithms, like counting sort and radix sort, exploit the inherent properties of the data to sort elements without direct comparisons.</li>
+                <li><b>Stability:</b> A sorting algorithm is considered stable if it maintains the relative order of equal elements in the sorted output as they were in the input. Stability is an essential characteristic in scenarios where secondary sorting is required.</li>
+                <li><b>Time Complexity:</b> The efficiency of sorting algorithms is often evaluated in terms of time complexity, which represents the computational time required for the algorithm to complete as a function of the input size. Common notations include O(n^2) for quadratic time complexity (e.g., bubble sort) and O(n log n) for algorithms with better average and worst-case performance (e.g., merge sort, quicksort).</li>
+                <li><b>Space Complexity:</b> Sorting algorithms also differ in their space complexity, which indicates the amount of additional memory required for sorting. In-place algorithms, such as bubble sort and insertion sort, sort the elements within the existing data structure without requiring additional memory. On the other hand, algorithms like merge sort may need extra space proportional to the input size.</li>
+                <li><b>Adaptivity:</b> Some sorting algorithms exhibit adaptivity, meaning their performance improves when applied to partially ordered data. Adaptive algorithms, like insertion sort, are well-suited for situations where the input data is already partially sorted.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="algorithm-information-div">
+        <div class="description">
+            <h1 class="unsorted-array-title">Unsorted Array</h1>
+            <div class="unsorted-array">         
+                <div class="sorted-example"><b>9</b></div>
+                <div class="sorted-example"><b>1</b></div>
+                <div class="sorted-example"><b>3</b></div>
+                <div class="sorted-example"><b>2</b></div>
+                <div class="sorted-example"><b>7</b></div>
+                <div class="sorted-example"><b>7</b></div>
+            </div>
+            <h1 class="sorted-array-title">Sorted Array</h1>
+            <div class="sorted-array">
+                <div class="sorted-example-green"><b>1</b></div>
+                <div class="sorted-example-green"><b>2</b></div>
+                <div class="sorted-example-green"><b>3</b></div>
+                <div class="sorted-example-green"><b>4</b></div>
+                <div class="sorted-example-green"><b>7</b></div>
+                <div class="sorted-example-green"><b>9</b></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="insertion-algorithm-information-div"  id="insertion">
+        <div class="description">
+            <h1 class="information-title">Insertion</h1>
+            <p>
+                Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part.
+            </p>
+            <br>
+            <p>
+                To sort an array of size N in ascending order iterate over the array and compare the current element (key) to its predecessor, if the key element is smaller than its predecessor, compare it to the elements before. Move the greater elements one position up to make space for the swapped element.
+            </p>
+            <br>
+            <p>
+                Consider an example: arr[]: { <b>12</b>, <b>11</b>, <b>13</b>, <b>5</b>, <b>6</b> }
+            </p>
+            <div class="grid-layout">
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>11</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <br>
+            <br>
+            <p>
+                <b>First Pass:</b>
+            </p>
+            <ul>
+                <li>Initially, the first two elements of the array are compared in insertion sort.</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-blue"><b>12</b></div>
+                <div class="insertion-example-blue"><b>11</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Here, <b>12</b> is greater than <b>11</b> hence they are not in the ascending order and <b>12</b> is not at its correct position. Thus, swap <b>11</b> and <b>12</b>.</li>
+                <li>So, for now <b>11</b> is stored in a sorted sub-array.</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <br>
+            <br>
+            <p>
+                <b>Second Pass:</b>
+            </p>
+            <ul>
+                <li> Now, move to the next two elements and compare them</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example-blue"><b>12</b></div>
+                <div class="insertion-example-blue"><b>13</b></div>
+                <div class="insertion-example"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Here, <b>13</b> is greater than <b>12</b>, thus both elements seems to be in ascending order, hence, no swapping will occur. <b>12</b> also stored in a sorted sub-array along with <b>11</b></li>
+            </ul>
+            <br>
+            <p>
+                <b>Third Pass:</b>
+            </p>
+            <ul>
+                <li>Now, two elements are present in the sorted sub-array which are <b>11</b> and <b>12</b></li>
+                <li>Moving forward to the next two elements which are <b>13</b> and <b>5</b></li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example-orangered"><b>12</b></div>
+                <div class="insertion-example-blue"><b>13</b></div>
+                <div class="insertion-example-blue"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Both <b>5</b> and <b>13</b> are not present at their correct place so swap them</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example-blue"><b>12</b></div>
+                <div class="insertion-example-blue"><b>5</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>After swapping, elements <b>12</b> and <b>5</b> are not sorted, thus swap again</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-blue"><b>11</b></div>
+                <div class="insertion-example-blue"><b>5</b></div>
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Here, again <b>11</b> and <b>5</b> are not sorted, hence swap again</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>5</b></div>
+                <div class="insertion-example"><b>11</b></div>
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>13</b></div>
+                <div class="insertion-example"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Here, <b>5</b> is at its correct position</li>
+            </ul>
+            <br>
+                <p>
+                    <b>Fourth Pass:</b>
+                </p>
+            <ul>
+                <li>Now, the elements which are present in the sorted sub-array are <b>5</b>, <b>11</b> and <b>12</b></li>
+                <li>Moving to the next two elements <b>13</b> and <b>6</b></li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>5</b></div>
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example-orangered"><b>12</b></div>
+                <div class="insertion-example-blue"><b>13</b></div>
+                <div class="insertion-example-blue"><b>6</b></div>
+            </div>
+            <ul>
+                <li>Clearly, they are not sorted, thus perform swap between both</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>5</b></div>
+                <div class="insertion-example-orangered"><b>11</b></div>
+                <div class="insertion-example-blue"><b>12</b></div>
+                <div class="insertion-example-blue"><b>6</b></div>
+                <div class="insertion-example"><b>13</b></div>
+            </div>
+            <ul>
+                <li>Now, <b>6</b> is smaller than <b>12</b>, hence, swap again</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example-orangered"><b>5</b></div>
+                <div class="insertion-example-blue"><b>11</b></div>
+                <div class="insertion-example-blue"><b>6</b></div>
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>13</b></div>
+            </div>
+            <ul>
+                <li>Here, also swapping makes <b>11</b> and <b>6</b> unsorted hence, swap again</li>
+            </ul>
+            <div class="grid-layout">
+                <div class="insertion-example"><b>5</b></div>
+                <div class="insertion-example"><b>6</b></div>
+                <div class="insertion-example"><b>11</b></div>
+                <div class="insertion-example"><b>12</b></div>
+                <div class="insertion-example"><b>13</b></div>
+            </div>
+            <ul>
+                <li>Finally, the array is completely sorted.</li>
+            </ul>
+            <br>
+            <div class="grid-layout">
+                <div class="insertion-example-green"><b>5</b></div>
+                <div class="insertion-example-green"><b>6</b></div>
+                <div class="insertion-example-green"><b>11</b></div>
+                <div class="insertion-example-green"><b>12</b></div>
+                <div class="insertion-example-green"><b>13</b></div>
+            </div>
+            <p>
+                Sorted array.
+            </p>
+        </div>
+    </div>
+
+    <div class="selection-algorithm-information-div" id="selection">
+        <div class="selection-description">
+            <h1 class="information-title">Selection</h1>
+            <br>
+            <p>
+                Selection sort is an in-place comparison sorting algorithm.
+            </p>
+            <p>
+                The algorithm divides the input list into two parts: a sorted sublist of items which is built up from left to right at the front (left) of the list and a sublist of the remaining unsorted items that occupy the rest of the list.
+            </p>
+            <p>
+                Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element in the unsorted sublist, exchanging (swapping) it with the leftmost unsorted element (putting it in sorted order), and moving the sublist boundaries one element to the right.
+            </p>
+            <br>
+            <img class="selection-animation-image" src="images/selection-animation.gif" alt="">
+            <div class="selection-animation-image-text">
+                <ul>
+                    <li>
+                        As we traverse through the array in an initial loop, we push forward through the array with a second pointer in a nested loop at the same time, comparing each value to the starting value (beginning with our first loop's initial index.) If we find a lower value, we set that new value as our new lowest value to be compared against, and continue pushing.
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        By doing this, we ensure that each time we traverse through the array we will always find the next lowest value. When we reach the end of our second loop, we swap the lowest value with our very first initial index's value, and proceed to the next step.
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        This could also be done in reverse order, by searching for the largest values, if we were interested in sorting from highest to lowest.
+                    </li>
+                </ul>
+            </div>
+            <h1>How efficient is it?</h1>
+            <p>
+                Selection Sort, while relatively simple to comprehend and implement, unfortunately lags behind other sorting algorithms like Quick Sort, Heap Sort, and Merge Sort for larger data sets.
+            </p>
+            <p>
+                However, since Selection Sort functions in-place and requires no auxiliary memory, it does have a space advantage over some other more complicated algorithms.
+            </p>
+            <p>
+                Generally speaking, Insertion Sort is likely to be a more performant alternative, although Selection Sort is still important to know and understand as a programmer and computer scientist.
+            </p>
+            <p>
+                Selection Sort has a best case, worst case, and average case runtime complexity of O(n^2), meaning it will always be quadratic in nature.
+            </p>
+        </div>
+    </div>
+
+    <div class="bubble-algorithm-information-div" id="bubble">
+        <div class="description">
+            <h1 class="information-title">Bubble</h1>
+            <br>
+            <p>
+                Bubble sort algorithm is a simple sorting technique that compares two adjacent elements in an array and swaps them if they are in the wrong order. It keeps repeating this process until the array is sorted.
+            </p>
+            <p>
+                For example, the diagram below illustrates the different swaps/bubble that happens when the element on the left is greater than the element on the right.
+            </p>
+            <p>
+                Also, at the end of the array iteration, it checks to see if any swaps occurred; if so, the process is repeated; otherwise, the array is sorted.
+            </p>
+            <br>
+            <p>
+                Unsorted Array
+            </p>
+            <div class="grid-layout">
+                <div class="bubble-example"><b>[ 12, 3, 7, 4, 10 ]</b></div>
+            </div>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-12">[ 12, 3, 7, 4, 10 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">Swap since 12 > 3</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">[ 3, 12, 7, 4, 10 ]</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 12 is greater than 3. Swap 12 and 3
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-12">[ 3, 12, 7, 4, 10 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">Swap since 12 > 7</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">[ 3, 7, 12, 4, 10 ]</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 12 is greater than 7. Swap 12 and 7
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-12">[ 3, 7, 12, 4, 10 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">Swap since 12 > 4</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">[ 3, 7, 4, 12, 10 ]</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 12 is greater than 4. Swap 12 and 4
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-12">[ 3, 7, 4, 12, 10 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">Swap since 12 > 10</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-12">[ 3, 7, 4, 10, 12 ]</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 12 is greater than 10. Swap 12 and 10
+                </li>
+            </ul>
+            <br>
+            <p>Repeat the process since elements has been swapped.</p>
+            <br>
+            <div class="grid-layout">
+                <div class="bubble-example"><b>[ 3, 7, 4, 10, 12 ]</b></div>
+            </div>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-3">[ 3, 7, 4, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-3">No swap since 3 < 7</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 3 is not greater than 7. No swap
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-7">[ 3, 7, 4, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-7">Swap since 7 > 4</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-7">[ 3, 4, 7, 10, 12 ]</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 7 is greater than 4. Swap 7 and 4
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-7">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-7">No swap since 7 < 10</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 7 is not greater than 10. No swap
+                </li>
+            </ul>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-10">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-10">No swap since 10 < 12</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 10 is not greater than 12. No swap
+                </li>
+            </ul>
+            <br>
+            <p>Repeat the process since elements has been swapped.</p>
+            <br>
+            <div class="grid-layout">
+                <div class="bubble-example"><b>[ 3, 4, 7, 10, 12 ]</b></div>
+            </div>
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-3">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-3">No swap since 3 < 4</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 3 is not greater than 4. No swap
+                </li>
+            </ul>
+
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-4">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-4">No swap since 4 < 7</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 4 is not greater than 7. No swap
+                </li>
+            </ul>
+
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-7">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-7">No swap since 7 < 10</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 7 is not greater than 10. No swap
+                </li>
+            </ul>
+
+            <div class="grid-layout">
+                <div class="bubble-example"><b class="highlight-10">[ 3, 4, 7, 10, 12 ]</b></div>
+                <div class="bubble-example"><b>→</b></div>
+                <div class="bubble-example"><b class="highlight-10">No swap since 10 < 12</b></div>
+            </div>
+            <ul>
+                <li>
+                    Here 10 is not greater than 12. No swap
+                </li>
+            </ul>
+            <br>
+            <p>
+                End of array since no elements has swapped.
+            </p>
+            <br>
+            <div class="grid-layout">
+                <div class="bubble-example"><b>[ 3, 4, 7, 10, 12 ]</b></div>
+            </div>
+            <p>
+                Sorted array.
+            </p>
+        </div>
+    </div>
+
+    <div class="shell-algorithm-information-div" id="shell">
+        <div class="description">
+            <h1 class="information-title">Shell</h1>
+            <br>
+            <p>
+                The key idea behind Shell Sort is to repeatedly divide the input array into smaller subarrays and sort the elements within those subarrays using an insertion sort.
+            </p>
+            <p>
+                The algorithm works by defining a sequence of increment values (often referred to as the "gap" sequence), which determine the size of the subarrays. The elements that are a certain gap distance apart are compared and swapped if necessary. The gap is then reduced, and the process is repeated until the gap becomes 1. At this point, the algorithm performs a final insertion sort on the entire array.
+            </p>
+            <p>
+                Shell Sort has a time complexity that depends on the chosen gap sequence, and in practice, it exhibits better performance than simpler quadratic sorting algorithms. However, it is generally outperformed by more advanced sorting algorithms like quicksort and mergesort for larger datasets. Shell Sort is often used in scenarios where memory is limited, and more advanced algorithms may not be feasible.
+            </p>
+            <br>
+            <p>
+                Unsorted Array
+            </p>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+            </div>
+            <br>
+            <p>
+                Step 1
+            </p>
+            <ul>
+                <li>
+                    Here, the array size is 8. Thus, the interval value will be h = 8/2 or 4.
+                </li>
+            </ul>
+            <p>
+                Step 2
+            </p>
+            <ul>
+                <li>
+                    Now, we will store all the elements at a distance of 4. For our case, the sublists are = { 8, 1 }, { 6, 4 }, { 7, 5 }, { 2, 3 }.
+                </li>
+            </ul>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>8</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="shell-example-green"><b>1</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div></div>
+                <div class="shell-example-orangered"><b>6</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="shell-example-orangered"><b>4</b></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div></div>
+                <div></div>
+                <div class="shell-example-blue"><b>7</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="shell-example-blue"><b>5</b></div>
+                <div></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="shell-example-purple"><b>2</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="shell-example-purple"><b>3</b></div>
+            </div>
+            <br>
+            <p>
+                Step 3
+            </p>
+            <ul>
+                <li>
+                    Now, those sublists will be sorted using insertion sort, where a temporary variable is used to compare both numbers and sort accordingly.
+                </li>
+            </ul>
+            <p>
+                Now, the array looks like this.
+            </p>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>3</b></div>
+            </div>
+            <br>
+            <p>
+                Step 4
+            </p>
+            <ul>
+                <li>
+                    Now, we will decrease the initial value of the interval. The new interval will be h=h/2 or 4/2 or 2.
+                </li>
+            </ul>
+            <p>
+                Step 5
+            </p>
+            <ul>
+                <li>
+                    As 2>0, we will go to step 2 to store all the elements at a distance of 2. For this time, the sublists are = { 1, 5, 8, 7 }, { 4, 2, 6, 3 }
+                </li>
+            </ul>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>3</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div></div>
+                <div class="shell-example-green"><b>8</b></div>
+                <div></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div></div>
+                <div class="shell-example-purple"><b>4</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>2</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>6</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>3</b></div>
+            </div>
+            <br>
+            <p>
+                Then these sublists will be sorted using insertion sort. After comparing and swapping the first sublist, the array would be the following.
+            </p>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>6</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>3</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div></div>
+                <div class="shell-example-purple"><b>4</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>2</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>6</b></div>
+                <div></div>
+                <div class="shell-example-purple"><b>3</b></div>
+            </div>
+            <br>
+            <p>
+                After sorting the second sublist, the original array will be:
+            </p>
+            <div class="shell-grid-layout">
+                <div class="shell-example"><b>1</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <br>
+            <p>
+                Then again, the interval will be decreased. Now the interval will be h=h/2 or 2/1 or 1. Hence we will use the insertion sort algorithm to sort the modified array.
+            </p>
+            <p>
+                Following is the step-by-step procedural depiction of insertion sort.
+            </p>
+            <br>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example"><b>2</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example"><b>3</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-blue"><b>5</b></div>
+                <div class="shell-example-red"><b>3</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-blue"><b>7</b></div>
+                <div class="shell-example-red"><b>4</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-blue"><b>5</b></div>
+                <div class="shell-example-red"><b>4</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example-green"><b>8</b></div>
+                <div class="shell-example"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example-blue"><b>8</b></div>
+                <div class="shell-example-red"><b>6</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-blue"><b>7</b></div>
+                <div class="shell-example-red"><b>6</b></div>
+                <div class="shell-example-green"><b>8</b></div>
+            </div>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>6</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example-green"><b>8</b></div>
+            </div>
+            <br>
+            <p>
+                The interval is again divided by 2. By this time, the interval becomes 0.
+            </p>
+            <p>
+                As the interval is 0, the array is sorted
+            </p>
+            <div class="shell-grid-layout">
+                <div class="shell-example-green"><b>1</b></div>
+                <div class="shell-example-green"><b>2</b></div>
+                <div class="shell-example-green"><b>3</b></div>
+                <div class="shell-example-green"><b>4</b></div>
+                <div class="shell-example-green"><b>5</b></div>
+                <div class="shell-example-green"><b>6</b></div>
+                <div class="shell-example-green"><b>7</b></div>
+                <div class="shell-example-green"><b>8</b></div>
+            </div>
+            <p>
+                Sorted array.
+            </p>
+        </div>
+    </div>
+    
+    <div class="merge-algorithm-information-div" id="merge">
+        <div class="description">
+            <h1 class="information-title">Merge</h1>
+            <br>
+            <p>
+                Merge Sort is a popular and efficient divide-and-conquer sorting algorithm.
+            </p>
+            <p>
+                The primary idea behind Merge Sort is to divide the unsorted array into two halves, recursively sort each half, and then merge the sorted halves to produce a fully sorted array.
+            </p>
+            <p>
+                Merge Sort ensures stability, meaning that the order of equal elements in the original array is preserved in the sorted array. It has a guaranteed time complexity of O(n log n), making it efficient for large datasets. However, it comes with a space complexity of O(n) due to the need for additional space to store the merged subarrays.
+            </p>
+            <p>
+                Merge Sort is widely used in various applications and serves as a foundation for more advanced sorting algorithms. Its predictable and efficient performance makes it a reliable choice for sorting large datasets.
+            </p>
+            <br>
+            <p>
+                Unsorted Array
+            </p>
+            <div class="merge-grid-layout">
+                <div class="merge-example"><b>12</b></div>
+                <div class="merge-example"><b>31</b></div>
+                <div class="merge-example"><b>25</b></div>
+                <div class="merge-example"><b>8</b></div>
+                <div class="merge-example"><b>32</b></div>
+                <div class="merge-example"><b>17</b></div>
+                <div class="merge-example"><b>40</b></div>
+                <div class="merge-example"><b>42</b></div>
+            </div>
+            <br>
+            <p>
+                Step 1
+            </p>
+            <ul>
+                <li>
+                    As there are eight elements in the given array, so it is divided into two arrays of size 4.
+                </li>
+            </ul>
+            <div class="merge-grid-layout-split-in-half">
+                <div class="merge-example"><b>12</b></div>
+                <div class="merge-example"><b>31</b></div>
+                <div class="merge-example"><b>25</b></div>
+                <div class="merge-example"><b>8</b></div>
+                <div></div>
+                <div class="merge-example"><b>32</b></div>
+                <div class="merge-example"><b>17</b></div>
+                <div class="merge-example"><b>40</b></div>
+                <div class="merge-example"><b>42</b></div>
+            </div>
+            <br>
+            <p>
+                Step 2
+            </p>
+            <ul>
+                <li>
+                    Now, again divide these two arrays into halves. As they are of size 4, so divide them into new arrays of size 2.
+                </li>
+            </ul>
+            <div class="merge-grid-layout-split-in-half-two">
+                <div class="merge-example"><b>12</b></div>
+                <div class="merge-example"><b>31</b></div>
+                <div></div>
+                <div class="merge-example"><b>25</b></div>
+                <div class="merge-example"><b>8</b></div>
+                <div></div>
+                <div class="merge-example"><b>32</b></div>
+                <div class="merge-example"><b>17</b></div>
+                <div></div>
+                <div class="merge-example"><b>40</b></div>
+                <div class="merge-example"><b>42</b></div>
+            </div>
+            <br>
+            <p>
+                Step 3
+            </p>
+            <ul>
+                <li>
+                    Now, again divide these arrays to get the atomic value that cannot be further divided.
+                </li>
+            </ul>
+            <div class="merge-grid-layout-split-in-half-three">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="merge-example"><b>12</b></div>
+                <div></div>
+                <div class="merge-example"><b>31</b></div>
+                <div></div>
+                <div class="merge-example"><b>25</b></div>
+                <div></div>
+                <div class="merge-example"><b>8</b></div>
+                <div></div>
+                <div></div>
+                <div class="merge-example"><b>32</b></div>
+                <div></div>
+                <div class="merge-example"><b>17</b></div>
+                <div></div>
+                <div class="merge-example"><b>40</b></div>
+                <div></div>
+                <div class="merge-example"><b>42</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <br>
+            <ul>
+                <li>
+                    Now you can't divide anymore it's time to merge.
+                </li>
+            </ul>
+            <br>
+            <p>
+                Step 4
+            </p>
+            <ul>
+                <li>
+                    In combining, first compare the element of each array and then combine them into another array in sorted order.
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    So, first compare 12 and 31, both are in sorted positions. Then compare 25 and 8, and in the list of two values, put 8 first followed by 25. Then compare 32 and 17, sort them and put 17 first followed by 32. After that, compare 40 and 42, and place them sequentially.
+                </li>
+            </ul>
+            <div class="merge-grid-layout-split-in-half-two">
+                <div class="merge-example"><b>12</b></div>
+                <div class="merge-example"><b>31</b></div>
+                <div></div>
+                <div class="merge-example"><b>8</b></div>
+                <div class="merge-example"><b>25</b></div>
+                <div></div>
+                <div class="merge-example"><b>17</b></div>
+                <div class="merge-example"><b>32</b></div>
+                <div></div>
+                <div class="merge-example"><b>40</b></div>
+                <div class="merge-example"><b>42</b></div>
+            </div>
+            <br>
+            <p>
+                Step 5
+            </p>
+            <ul>
+                <li>
+                    In the next iteration of combining, now compare the arrays with two data values and merge them into an array of found values in sorted order.
+                </li>
+            </ul>
+            <div class="merge-grid-layout-split-in-half">
+                <div class="merge-example"><b>8</b></div>
+                <div class="merge-example"><b>12</b></div>
+                <div class="merge-example"><b>25</b></div>
+                <div class="merge-example"><b>31</b></div>
+                <div></div>
+                <div class="merge-example"><b>17</b></div>
+                <div class="merge-example"><b>32</b></div>
+                <div class="merge-example"><b>40</b></div>
+                <div class="merge-example"><b>42</b></div>
+            </div>
+            <br>
+            <p>
+                Step 6
+            </p>
+            <ul>
+                <li>
+                    Now, there is a final merging of the arrays.
+                </li>
+            </ul>
+            <br>
+            <div class="merge-grid-layout">
+                <div class="merge-example-green"><b>8</b></div>
+                <div class="merge-example-green"><b>12</b></div>
+                <div class="merge-example-green"><b>17</b></div>
+                <div class="merge-example-green"><b>25</b></div>
+                <div class="merge-example-green"><b>31</b></div>
+                <div class="merge-example-green"><b>32</b></div>
+                <div class="merge-example-green"><b>40</b></div>
+                <div class="merge-example-green"><b>42</b></div>
+            </div>
+            <p>
+                Sorted array.
+            </p>
+        </div>
+    </div>
+
+    <div class="quick-algorithm-information-div" id="quick">
+        <div class="description">
+            <h1 class="information-title">Quick</h1>
+            <br>
+            <p>
+                QuickSort is a widely used sorting algorithm known for its efficiency and simplicity. It follows a divide-and-conquer approach to sort an array of elements. The algorithm works by selecting a "pivot" element from the array and partitioning the other elements into two sub-arrays based on whether they are less than or greater than the pivot. This process is then applied recursively to the sub-arrays. The key steps in QuickSort are:
+            </p>
+            <ul>
+                <li>
+                    <b>Pivot Selection:</b> Choose a pivot element from the array. Common strategies include selecting the first, last, or middle element.
+                </li>
+                <li>
+                    <b>Partitioning:</b> Rearrange the array elements so that elements less than the pivot are on its left, and elements greater than the pivot are on its right. The pivot is now in its final sorted position.
+                </li>
+                <li>
+                    <b>Recursive Sort:</b> Apply QuickSort recursively to the sub-arrays on the left and right of the pivot until the entire array is sorted.
+                </li>
+            </ul>
+            <br>
+            <p>
+                Unsorted Array
+            </p>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>2</b></div>
+            </div>
+            <br>
+            <p>
+                Step 1
+            </p>
+            <ul>
+                <li>
+                    Select the <b>Pivot</b> element. In this case it's going to be 2.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <br>
+            <p>
+                Step 2
+            </p>
+            <ul>
+                <li>
+                    Rearrange the array. Put all elements smaller than the <b>Pivot</b> element to the left and elements larger to the right.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>6</b></div>
+            </div>
+            <br>
+            <p>
+                Here's how we rearrange the array
+            </p>
+            <ul>
+                <li>
+                    A pointer is fixed at the pivot element. The pivot element is compared with the elements beginning from the first index.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <br>
+            <ul>
+                <li>
+                    If the element is greater than the pivot element, a second pointer is set for that element.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b>↑</b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b>(Second pointer)</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>(First pointer)</b></div>
+            </div>
+            <br>
+            <ul>
+                <li>
+                    Now, pivot is compared with other elements. If an element smaller than the pivot element is reached, the smaller element is swapped with the greater element found earlier.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <ul>
+                <li>
+                    No switch since 6 is bigger than the <b>Pivot</b> number.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <ul>
+                <li>
+                    Now, we want to switch elements 8 and 1 since 1 is smaller than the <b>Pivot</b> element.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <ul>
+                <li>
+                    Again, the process is repeated to set the next greater element as the second pointer. And, swap it with another smaller element.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b></b></div>
+                <div><b>(Second pointer)</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>(First pointer)</b></div>
+            </div>
+            <ul>
+                <li>
+                    Now, we want to switch elements 7 and 0 since 0 is smaller than the Pivot element.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <br>
+            <ul>
+                <li>
+                    The process goes on until the second last element is reached.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+            </div>
+            <div class="quick-grid-layout">
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b></b></div>
+                <div><b></b></div>
+                <div><b>↑</b></div>
+                <div><b>↑</b></div>
+            </div>
+            <ul>
+                <li>
+                    Finally, the pivot element is swapped with the second pointer.
+                </li>
+            </ul>
+            <div class="quick-grid-layout">
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>6</b></div>
+            </div>
+            <br>
+            <p>
+                Pivot elements are again chosen for the left and the right sub-parts separately. And, step 2 is repeated.
+            </p>
+            <div class="quick-grid-layout-x15">
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example-pivot"><b>2</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example-arrow"><b>→</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>2</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>6</b></div>
+            </div>
+            <div class="quick-grid-layout-x15">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>6</b></div>
+                <div></div>
+            </div>
+            <div class="quick-grid-layout-x15">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="quick-example-pivot"><b>6</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example-arrow"><b>→</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>2</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example"><b>8</b></div>
+            </div>
+            <div class="quick-grid-layout-x15">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-pivot"><b>8</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="quick-grid-layout-x15">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example-pivot"><b>8</b></div>
+                <div class="quick-example"><b>9</b></div>
+                <div class="quick-example-arrow"><b>→</b></div>
+                <div class="quick-example"><b>0</b></div>
+                <div class="quick-example"><b>1</b></div>
+                <div class="quick-example"><b>2</b></div>
+                <div class="quick-example"><b>6</b></div>
+                <div class="quick-example"><b>7</b></div>
+                <div class="quick-example"><b>8</b></div>
+                <div class="quick-example"><b>9</b></div>
+            </div>
+            <div class="quick-grid-layout-x15">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="quick-example"><b>7</b></div>
+                <div></div>
+                <div class="quick-example"><b>9</b></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <br>
+            <p>
+                Finally you will be ended up with a sorted array.
+            </p>
+            <div class="quick-grid-layout">
+                <div class="quick-example-green"><b>0</b></div>
+                <div class="quick-example-green"><b>1</b></div>
+                <div class="quick-example-green"><b>2</b></div>
+                <div class="quick-example-green"><b>6</b></div>
+                <div class="quick-example-green"><b>7</b></div>
+                <div class="quick-example-green"><b>8</b></div>
+                <div class="quick-example-green"><b>9</b></div>
+            </div>
+            <p>
+                Sorted array.
+            </p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    
+</body>
+</html>
